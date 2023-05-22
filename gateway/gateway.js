@@ -7,11 +7,11 @@ var logger = require('morgan');
 app.use(logger('dev'));
 
 function selectProxyHost(req) {
-    if (req.path.startWith('/usuarios')) return 'http://localhost:8010/'
-    else if (req.path.startWith('/salas')) return 'http://localhost:8020/'
-    else if (req.path.startWith('/registro')) return 'http://localhost:8030/'
-    else if (req.path.startWith('/liberacao')) return 'http://localhost:8040/'
-    else if (req.path.startWith('/controle')) return 'http://localhost:8050/'
+    if (req.path.startsWith('/usuarios')) return 'http://localhost:8010/'
+    else if (req.path.startsWith('/salas')) return 'http://localhost:8020/'
+    else if (req.path.startsWith('/registro')) return 'http://localhost:8030/'
+    else if (req.path.startsWith('/liberacao')) return 'http://localhost:8040/'
+    else if (req.path.startsWith('/controle')) return 'http://localhost:8050/'
     else return null    
 }
 

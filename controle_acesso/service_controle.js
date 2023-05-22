@@ -23,7 +23,7 @@ mongoose.connect(uri, {
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
-app.post('/autorizacao', async (req, res) => {
+app.post('/controle', async (req, res) => {
     try {
         const usuario = axios({
             method: 'get',
@@ -60,7 +60,32 @@ app.post('/autorizacao', async (req, res) => {
     }
 })
 
-const porta = 8030
+app.get('/controle', async (req, res) => {
+    try {
+        const result = await Autorizacao.find({})
+        res.status(200).send(result)
+    } catch (error) {
+        console.log(error)
+        res.status(500).send('Erro ao buscar autorizações')
+    }
+})
+
+app.get('/controle/:sala/:matricula', async (req, res) => {
+    try {
+        const result = await Autorizacao.findOne({ sala: req.params.sala, matricula: req.params.matricula })
+        console.log(result)
+        if(result == null){
+            res.status(200).send(false)
+            return
+        }
+            
+        res.status(200).send(result)
+    } catch (error) {
+        console.log(error)
+    }
+})
+
+const porta = 8050
 app.listen(porta, () => {
     console.log(`Servidor rodando na porta ${porta}`)
 })
