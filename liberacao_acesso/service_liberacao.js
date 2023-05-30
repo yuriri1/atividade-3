@@ -53,6 +53,7 @@ app.get("/liberacao/:sala/:matricula", async (req, res) => {
 
     if (!autorizacaoResponse.data) {
       console.log("Usuario não tem permissão a essa sala");
+      res.status(401).send("Usuario não tem permissão a essa sala");
       return;
     }
 
